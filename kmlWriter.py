@@ -3,8 +3,6 @@
 import Tkinter as tk
 import tkFileDialog as tfd
 import csv
-import string
-import alphabetDict
 
 class Application(tk.Frame):
     def __init__(self, master=None):
