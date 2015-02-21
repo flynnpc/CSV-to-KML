@@ -6,8 +6,9 @@ import csv
 
 class Application(tk.Frame):
     def __init__(self, master=None):
-        tk.Frame.__init__(self, master)
+        tk.Frame.__init__(self, master, borderwidth=10, bg="#FFFFFF")
         self.dropHead = tk.StringVar()
+        #self.img = tk.PhotoImage(file='csv.gif')
         
         self.nameScrollBar()
         self.lonScrollBar()
@@ -24,7 +25,7 @@ class Application(tk.Frame):
         self.lonSelect()
         
     def promptName(self):
-        self.pointNameCol = tk.Label(self, text="Point Name")
+        self.pointNameCol = tk.Label(self, text="Point Name", bg="#FFFFFF", fg="#363FD3")
         self.pointNameCol.grid(column=0, row=0)
         
     def nameSelect(self):
@@ -37,42 +38,42 @@ class Application(tk.Frame):
         self.nameScroll.grid(column=1, row=1)
     
     def promptLat(self):
-        self.latCol = tk.Label(self, text="Latitude")
+        self.latCol = tk.Label(self, text="Latitude", bg="#FFFFFF")
         self.latCol.grid(column=2, row=0)
         
     def latSelect(self):
         self.latList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.latScroll.set)
-        self.latList.grid(column=2, row=1)
-        self.latScroll.config(command=self.latList.yview)        
+        self.latList.grid(column=2, row=1, padx=(10,0))
+        self.latScroll.config(command=self.latList.yview)
 
     def latScrollBar(self):
         self.latScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
-        self.latScroll.grid(column=3, row=1)
+        self.latScroll.grid(column=3, row=1, sticky=tk.W)
         
     def promptLon(self):
-        self.lonCol = tk.Label(self, text="Longitude")
+        self.lonCol = tk.Label(self, text="Longitude", bg="#FFFFFF")
         self.lonCol.grid(column=4, row=0)
 
     def lonSelect(self):
         self.lonList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.lonScroll.set)
-        self.lonList.grid(column=4, row=1)
+        self.lonList.grid(column=4, row=1, padx=(10,0))
         self.lonScroll.config(command=self.lonList.yview)
    
     def lonScrollBar(self):
         self.lonScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
-        self.lonScroll.grid(column=5, row=1)      
+        self.lonScroll.grid(column=5, row=1, sticky=tk.W)      
     
     def quitButton(self):
-        self.quit = tk.Button(self, text='Quit', command=self.quit)
-        self.quit.grid(column=0, row=2)  
+        self.quit = tk.Button(self, text='Quit', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.quit)
+        self.quit.grid(column=0, row=2, pady=(10,0), sticky=tk.W)  
                        
     def openButton(self):
-        self.csvFile = tk.Button(self, text='Load', command=self.openCsv)
-        self.csvFile.grid(column=4,row=2)
+        self.csvFile = tk.Button(self, text='Load', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.openCsv)
+        self.csvFile.grid(column=3, row=2, columnspan=3, pady=(10,0), padx=(0,22))
         
     def convertButton(self):
-        self.convert = tk.Button(self, text='Convert', command=self.kmlWriter)
-        self.convert.grid(column=5, row=2)
+        self.convert = tk.Button(self, text='Convert', bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.kmlWriter, width=7)
+        self.convert.grid(column=4, row=2, columnspan=2, pady=(10,0), padx=(10,0), sticky=tk.E)
                 
     def openCsv(self):
         self.inputCSV = open(tfd.askopenfilename(filetypes=[('csv Files','*.csv')]),'rb')
