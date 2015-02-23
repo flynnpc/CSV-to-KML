@@ -8,7 +8,6 @@ class Application(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master, borderwidth=10, bg="#FFFFFF")
         self.dropHead = tk.StringVar()
-        #self.img = tk.PhotoImage(file='csv.gif')
         
         self.nameScrollBar()
         self.lonScrollBar()
