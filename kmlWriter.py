@@ -8,60 +8,49 @@ import csv
 class Application(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master, borderwidth=10, bg="#FFFFFF")
+        
         self.dropHead = tk.StringVar()
         
-        self.nameScrollBar()
-        self.lonScrollBar()
-        self.latScrollBar()
         self.grid()
         self.quitButton()
         self.convertButton()
         self.openButton()
-        #self.promptLat()
-        self.promptLon()
-        self.nameSelect()
-        self.latSelect()
-        self.lonSelect()
-        self.pointLabel = self.widgLabel("Point Name", "#FFFFFF")
-        self.latLabel = self.widgLabel("Latitude", "#FFFFFF")
 
-        self.pointLabel.grid(column=0, row=0)
-        self.latLabel.grid(column=2, row=0)
+        self.nameScrollBar()
+        self.nameSelect()
+
+        self.lonScrollBar()
+        self.lonSelect()
         
-    #def promptName(self):
-    #    self.pointNameCol = tk.Label(self, text="Point Name", bg="#FFFFFF")
-    #    self.pointNameCol.grid(column=0, row=0)
+        self.latScrollBar()
+        self.latSelect()
         
-    def widgLabel(self, words, color):
+        self.pointLabel = self.widgLabel("Point Name", "#FFFFFF", 0, 0)
+        self.latLabel = self.widgLabel("Latitude", "#FFFFFF", 2, 0)
+        self.lonLabel = self.widgLabel("Longitude", "#FFFFFF", 4, 0)
+        
+    def widgLabel(self, words, color, col, roe):
         self.pointNameCol = tk.Label(self, text=words, bg=color)
-        self.pointNameCol.grid(column=0, row=0)
-     
+        self.pointNameCol.grid(column=col, row=roe)
+
     def nameSelect(self):
         self.nameList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.nameScroll.set)
-        self.nameList.grid(column=0, row=1)
+        self.nameList.grid(column=0, row=1, padx=(10,0))
         self.nameScroll.config(command=self.nameList.yview)
-        
+    
     def nameScrollBar(self):
         self.nameScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
-        self.nameScroll.grid(column=1, row=1)
+        self.nameScroll.grid(column=1, row=1, sticky=tk.W)
     
-    #def promptLat(self):
-    #    self.latCol = tk.Label(self, text="Latitude", bg="#FFFFFF")
-    #    self.latCol.grid(column=2, row=0)
-        
     def latSelect(self):
         self.latList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.latScroll.set)
         self.latList.grid(column=2, row=1, padx=(10,0))
         self.latScroll.config(command=self.latList.yview)
-
+    
     def latScrollBar(self):
         self.latScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
         self.latScroll.grid(column=3, row=1, sticky=tk.W)
         
-    def promptLon(self):
-        self.lonCol = tk.Label(self, text="Longitude", bg="#FFFFFF")
-        self.lonCol.grid(column=4, row=0)
-
     def lonSelect(self):
         self.lonList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.lonScroll.set)
         self.lonList.grid(column=4, row=1, padx=(10,0))
@@ -70,7 +59,7 @@ class Application(tk.Frame):
     def lonScrollBar(self):
         self.lonScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
         self.lonScroll.grid(column=5, row=1, sticky=tk.W)      
-    
+
     def quitButton(self):
         self.quit = tk.Button(self, text='Quit', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.quit)
         self.quit.grid(column=0, row=2, pady=(10,0), sticky=tk.W)  
