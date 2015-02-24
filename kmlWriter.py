@@ -24,7 +24,7 @@ class Application(tk.Frame):
         self.lonSelect()
         
     def promptName(self):
-        self.pointNameCol = tk.Label(self, text="Point Name", bg="#FFFFFF", fg="#363FD3")
+        self.pointNameCol = tk.Label(self, text="Point Name", bg="#FFFFFF")
         self.pointNameCol.grid(column=0, row=0)
         
     def nameSelect(self):
