@@ -11,4 +11,4 @@ def alphabet():
         alphaDict[alpha[x]] = num
         num += 1
         x += 1
-    return(alphaDict)
+    return(alphaDict
