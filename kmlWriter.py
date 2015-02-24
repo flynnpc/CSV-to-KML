@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import Tkinter as tk
+import ttk
 import tkFileDialog as tfd
 import csv
 
@@ -16,17 +17,25 @@ class Application(tk.Frame):
         self.quitButton()
         self.convertButton()
         self.openButton()
-        self.promptName()
-        self.promptLat()
+        #self.promptLat()
         self.promptLon()
         self.nameSelect()
         self.latSelect()
         self.lonSelect()
+        self.pointLabel = self.widgLabel("Point Name", "#FFFFFF")
+        self.latLabel = self.widgLabel("Latitude", "#FFFFFF")
+
+        self.pointLabel.grid(column=0, row=0)
+        self.latLabel.grid(column=2, row=0)
         
-    def promptName(self):
-        self.pointNameCol = tk.Label(self, text="Point Name", bg="#FFFFFF")
+    #def promptName(self):
+    #    self.pointNameCol = tk.Label(self, text="Point Name", bg="#FFFFFF")
+    #    self.pointNameCol.grid(column=0, row=0)
+        
+    def widgLabel(self, words, color):
+        self.pointNameCol = tk.Label(self, text=words, bg=color)
         self.pointNameCol.grid(column=0, row=0)
-        
+     
     def nameSelect(self):
         self.nameList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.nameScroll.set)
         self.nameList.grid(column=0, row=1)
@@ -36,9 +45,9 @@ class Application(tk.Frame):
         self.nameScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
         self.nameScroll.grid(column=1, row=1)
     
-    def promptLat(self):
-        self.latCol = tk.Label(self, text="Latitude", bg="#FFFFFF")
-        self.latCol.grid(column=2, row=0)
+    #def promptLat(self):
+    #    self.latCol = tk.Label(self, text="Latitude", bg="#FFFFFF")
+    #    self.latCol.grid(column=2, row=0)
         
     def latSelect(self):
         self.latList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.latScroll.set)
