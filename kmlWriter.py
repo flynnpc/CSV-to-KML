@@ -8,16 +8,15 @@ import csv
 class Application(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent, borderwidth=10, bg="#FFFFFF")
-        self.master.title("CSV-2-KML Point Converter")
-        self.master.grid()
-        self.master.columnconfigure(0,weight=1)
-        self.master.rowconfigure(0, weight=1)
+        self.parent = parent
+        self.grid()
+        self.parent.title("CSV-2-KML Point Converter")
+        self.parent.columnconfigure(0,weight=1)
+        self.parent.rowconfigure(0, weight=1)
         self.createWidgets()
     
     def createWidgets(self):
-        self.grid(column=0, row=0, sticky=tk.EW)
-        self.columnconfigure(0,weight=1)
-        self.rowconfigure(0, weight=1)
+        self.grid(sticky=tk.NSEW)
 
 #-------Begin Attributes--------        
         self.dropHead = tk.StringVar()
@@ -34,7 +33,7 @@ class Application(tk.Frame):
         self.latLabel = tk.Label(self, text="Latitude", bg='#FFFFFF')
         self.latLabel.grid(column=2, row=0)
         
-        self.lonLabel = tk.Label(self, text="Latitude", bg='#FFFFFF')
+        self.lonLabel = tk.Label(self, text="Longitude", bg='#FFFFFF')
         self.lonLabel.grid(column=4, row=0)
                 
         #Name listbox with scrollbar
@@ -58,10 +57,14 @@ class Application(tk.Frame):
         self.lonList.grid(column=4, row=1, padx=(10,0))
         self.lonScroll.config(command=self.lonList.yview)
         
+        #Conversion complete label
+        self.convertLabel =tk.Label(self, text="Conversion Complete", bg="#FFFFFF")
+        self.convertLabel.grid(column=2, row=2, pady=(10,0))
+        
 #-------Begin Method Definitions    
     def quitButton(self):   
         self.quit = tk.Button(self, text='Quit', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.quit)
-        self.quit.grid(column=0, row=2, pady=(10,0), sticky=tk.W)  
+        self.quit.grid(column=0, row=2, pady=(10,0), padx=(10,0), sticky=tk.W)  
     
     def openCsv(self):
         self.inputCSV = open(tfd.askopenfilename(filetypes=[('csv Files','*.csv')]),'rb')
