@@ -6,9 +6,8 @@ import tkFileDialog as tfd
 import csv
 
 class Application(tk.Frame):
-    def __init__(self, master=None):
-        tk.Frame.__init__(self, master, borderwidth=10, bg="#FFFFFF")
-        
+    def __init__(self, parent):
+        tk.Frame.__init__(self, parent, borderwidth=10, bg="#FFFFFF")
         self.master.title("CSV-2-KML Point Converter")
         self.master.grid()
         self.master.columnconfigure(0,weight=1)
@@ -16,7 +15,9 @@ class Application(tk.Frame):
         self.createWidgets()
     
     def createWidgets(self):
-        self.grid()
+        self.grid(column=0, row=0, sticky=tk.EW)
+        self.columnconfigure(0,weight=1)
+        self.rowconfigure(0, weight=1)
 
 #-------Begin Attributes--------        
         self.dropHead = tk.StringVar()
