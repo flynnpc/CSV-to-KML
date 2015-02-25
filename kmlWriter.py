@@ -9,75 +9,73 @@ class Application(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master, borderwidth=10, bg="#FFFFFF")
         
+        self.master.title("CSV-2-KML Point Converter")
+        self.master.grid()
+        self.master.columnconfigure(0,weight=1)
+        self.master.rowconfigure(0, weight=1)
+        self.createWidgets()
+    
+    def createWidgets(self):
+        self.grid()
+
+#-------Begin Attributes--------        
         self.dropHead = tk.StringVar()
         
-        self.grid()
+#-------Begin Methods-----------        
         self.quitButton()
         self.convertButton()
         self.openButton()
-
-        self.nameScrollBar()
-        self.nameSelect()
-
-        self.lonScrollBar()
-        self.lonSelect()
         
-        self.latScrollBar()
-        self.latSelect()
+#-------Begin Widgets-----------
+        self.pointLabel = tk.Label(self, text="Point Name", bg='#FFFFFF')
+        self.pointLabel.grid(column=0, row=0)
         
-        self.pointLabel = self.widgLabel("Point Name", "#FFFFFF", 0, 0)
-        self.latLabel = self.widgLabel("Latitude", "#FFFFFF", 2, 0)
-        self.lonLabel = self.widgLabel("Longitude", "#FFFFFF", 4, 0)
+        self.latLabel = tk.Label(self, text="Latitude", bg='#FFFFFF')
+        self.latLabel.grid(column=2, row=0)
         
-    def widgLabel(self, words, color, col, roe):
-        self.pointNameCol = tk.Label(self, text=words, bg=color)
-        self.pointNameCol.grid(column=col, row=roe)
-
-    def nameSelect(self):
+        self.lonLabel = tk.Label(self, text="Latitude", bg='#FFFFFF')
+        self.lonLabel.grid(column=4, row=0)
+                
+        #Name listbox with scrollbar
+        self.nameScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
+        self.nameScroll.grid(column=1, row=1, sticky=tk.W)
         self.nameList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.nameScroll.set)
         self.nameList.grid(column=0, row=1, padx=(10,0))
         self.nameScroll.config(command=self.nameList.yview)
-    
-    def nameScrollBar(self):
-        self.nameScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
-        self.nameScroll.grid(column=1, row=1, sticky=tk.W)
-    
-    def latSelect(self):
+        
+        #Latitude Listbox with scrollbar
+        self.latScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
+        self.latScroll.grid(column=3, row=1, sticky=tk.W)
         self.latList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.latScroll.set)
         self.latList.grid(column=2, row=1, padx=(10,0))
         self.latScroll.config(command=self.latList.yview)
-    
-    def latScrollBar(self):
-        self.latScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
-        self.latScroll.grid(column=3, row=1, sticky=tk.W)
         
-    def lonSelect(self):
+        #Longitude Listbox with scrollbar
+        self.lonScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
+        self.lonScroll.grid(column=5, row=1, sticky=tk.W)           
         self.lonList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.lonScroll.set)
         self.lonList.grid(column=4, row=1, padx=(10,0))
         self.lonScroll.config(command=self.lonList.yview)
-   
-    def lonScrollBar(self):
-        self.lonScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
-        self.lonScroll.grid(column=5, row=1, sticky=tk.W)      
-
-    def quitButton(self):
+        
+#-------Begin Method Definitions    
+    def quitButton(self):   
         self.quit = tk.Button(self, text='Quit', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.quit)
         self.quit.grid(column=0, row=2, pady=(10,0), sticky=tk.W)  
-                       
-    def openButton(self):
-        self.csvFile = tk.Button(self, text='Load', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.openCsv)
-        self.csvFile.grid(column=3, row=2, columnspan=3, pady=(10,0), padx=(0,22))
-        
-    def convertButton(self):
-        self.convert = tk.Button(self, text='Convert', bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.kmlWriter, width=7)
-        self.convert.grid(column=4, row=2, columnspan=2, pady=(10,0), padx=(10,0), sticky=tk.E)
-                
+    
     def openCsv(self):
         self.inputCSV = open(tfd.askopenfilename(filetypes=[('csv Files','*.csv')]),'rb')
         self.csvFile = csv.reader(self.inputCSV)
         self.csvOne = next(self.csvFile,None)
         self.dropHead.set(tuple(self.csvOne))
-        
+    
+    def openButton(self):                
+        self.csvFile = tk.Button(self, text='Load', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.openCsv)
+        self.csvFile.grid(column=3, row=2, columnspan=3, pady=(10,0), padx=(0,22))
+    
+    def convertButton(self):    
+        self.convert = tk.Button(self, text='Convert', bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.kmlWriter, width=7)
+        self.convert.grid(column=4, row=2, columnspan=2, pady=(10,0), padx=(10,0), sticky=tk.E)
+           
     def kmlWriter(self):
         
         self.namePosit = int(self.nameList.curselection()[0])
@@ -99,8 +97,11 @@ class Application(tk.Frame):
             self.kmlFile.write('\n\t</Placemark>\n\t')
         self.kmlFile.write('</Document></kml>')
         self.kmlFile.close()
+    
+def main():
+        root = tk.Tk()
+        app = Application(root)
+        root.mainloop()
         
-
-app = Application()
-app.master.title('CSV 2 KML Point Converter')
-app.mainloop()
+if __name__ == '__main__':
+    main()
