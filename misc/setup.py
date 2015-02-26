@@ -7,7 +7,7 @@ setup(
     windows = [
         {
             "script": "kmlWriter.py",
-            "icon_resources": [(0, "comma.ico")]
+            "icon_resources": [(1, "comma.ico")]
         }
     ],
 )

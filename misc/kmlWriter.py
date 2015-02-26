@@ -91,11 +91,13 @@ class Application(tk.Frame):
         for row in self.csvFile:       
             self.kmlFile.write('<Placemark>\n\t')
             self.kmlFile.write('<name>' + row[self.namePosit] + '</name>\n')
-            self.kmlFile.write('\t<description>\n\t\ttest')
+            self.kmlFile.write('\t<description>\n')
+            self.kmlFile.write('<![CDATA[')
             self.head = 0
             while self.head < len(self.csvOne):
                 self.kmlFile.write(self.csvOne[self.head] + ': ' + row[self.head]+ '\n\t')
                 self.head += 1
+            self.kmlFile.write(']]>')
             self.kmlFile.write('</description>\n\t')
             self.kmlFile.write('<Point>\n\t\t<coordinates>'+row[self.lonPosit]+ ','+ row[self.latPosit]+ ',0</coordinates>\n\t</Point>')
             self.kmlFile.write('\n\t</Placemark>\n\t')
