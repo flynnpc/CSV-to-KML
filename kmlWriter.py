@@ -27,13 +27,13 @@ class Application(tk.Frame):
         self.openButton()
         
 #-------Begin Widgets-----------
-        self.pointLabel = ttk.Label(self, text="Point Name", background='#FFFFFF')
+        self.pointLabel = tk.Label(self, text="Point Name", background='#FFFFFF')
         self.pointLabel.grid(column=0, row=0)
         
-        self.latLabel = tk.Label(self, text="Latitude", bg='#FFFFFF')
+        self.latLabel = tk.Label(self, text="Latitude", background='#FFFFFF')
         self.latLabel.grid(column=2, row=0)
         
-        self.lonLabel = tk.Label(self, text="Longitude", bg='#FFFFFF')
+        self.lonLabel = tk.Label(self, text="Longitude", background='#FFFFFF')
         self.lonLabel.grid(column=4, row=0)
                 
         #Name listbox with scrollbar
@@ -51,19 +51,19 @@ class Application(tk.Frame):
         self.latScroll.config(command=self.latList.yview)
         
         #Longitude Listbox with scrollbar
-        self.lonScroll = ttk.Scrollbar(self, orient=tk.VERTICAL)
+        self.lonScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
         self.lonScroll.grid(column=5, row=1, sticky=tk.W)           
         self.lonList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.lonScroll.set)
         self.lonList.grid(column=4, row=1, padx=(10,0))
         self.lonScroll.config(command=self.lonList.yview)
         
         #Conversion complete label
-        self.convertLabel = ttk.Label(self, textvariable=self.complete, background="#FFFFFF")
+        self.convertLabel = tk.Label(self, textvariable=self.complete, background="#FFFFFF")
         self.convertLabel.grid(column=2, row=2, pady=(10,0))
         
 #-------Begin Method Definitions    
     def quitButton(self):   
-        self.quit = tk.Button(self, text='Quit', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.quit)
+        self.quit = tk.Button(self, text='Quit', width=7, background="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.quit)
         self.quit.grid(column=0, row=2, pady=(10,0), padx=(10,0), sticky=tk.W)  
     
     def openCsv(self):
@@ -77,7 +77,7 @@ class Application(tk.Frame):
         self.csvFile.grid(column=3, row=2, columnspan=3, pady=(10,0), padx=(0,22))
     
     def convertButton(self):    
-        self.convert = tk.Button(self, text='Convert', bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.kmlWriter, width=7)
+        self.convert = tk.Button(self, text='Convert', background="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.kmlWriter, width=7)
         self.convert.grid(column=4, row=2, columnspan=2, pady=(10,0), padx=(10,0), sticky=tk.E)
            
     def kmlWriter(self):
