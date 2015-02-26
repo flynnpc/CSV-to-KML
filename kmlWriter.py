@@ -20,7 +20,7 @@ class Application(tk.Frame):
 
 #-------Begin Attributes--------        
         self.dropHead = tk.StringVar()
-        
+        self.complete = tk.StringVar()
 #-------Begin Methods-----------        
         self.quitButton()
         self.convertButton()
@@ -51,14 +51,14 @@ class Application(tk.Frame):
         self.latScroll.config(command=self.latList.yview)
         
         #Longitude Listbox with scrollbar
-        self.lonScroll = tk.Scrollbar(self, orient=tk.VERTICAL)
+        self.lonScroll = ttk.Scrollbar(self, orient=tk.VERTICAL)
         self.lonScroll.grid(column=5, row=1, sticky=tk.W)           
         self.lonList = tk.Listbox(self, exportselection=0, height=3, listvariable=self.dropHead, yscrollcommand=self.lonScroll.set)
         self.lonList.grid(column=4, row=1, padx=(10,0))
         self.lonScroll.config(command=self.lonList.yview)
         
         #Conversion complete label
-        self.convertLabel =tk.Label(self, text="Conversion Complete", bg="#FFFFFF")
+        self.convertLabel = ttk.Label(self, textvariable=self.complete, background="#FFFFFF")
         self.convertLabel.grid(column=2, row=2, pady=(10,0))
         
 #-------Begin Method Definitions    
@@ -101,7 +101,8 @@ class Application(tk.Frame):
             self.kmlFile.write('\n\t</Placemark>\n\t')
         self.kmlFile.write('</Document></kml>')
         self.kmlFile.close()
-    
+        #Updates the label to indicate conversion is complete. 
+        self.complete.set("Conversion Complete!")
 def main():
         root = tk.Tk()
         app = Application(root)
