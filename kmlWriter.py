@@ -27,7 +27,7 @@ class Application(tk.Frame):
         self.openButton()
         
 #-------Begin Widgets-----------
-        self.pointLabel = tk.Label(self, text="Point Name", bg='#FFFFFF')
+        self.pointLabel = ttk.Label(self, text="Point Name", background='#FFFFFF')
         self.pointLabel.grid(column=0, row=0)
         
         self.latLabel = tk.Label(self, text="Latitude", bg='#FFFFFF')
@@ -73,7 +73,7 @@ class Application(tk.Frame):
         self.dropHead.set(tuple(self.csvOne))
     
     def openButton(self):                
-        self.csvFile = tk.Button(self, text='Load', width=7, bg="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.openCsv)
+        self.csvFile = tk.Button(self, text='Load', width=7, background="#363FD3", fg="#FFFFFF", relief=tk.FLAT, command=self.openCsv)
         self.csvFile.grid(column=3, row=2, columnspan=3, pady=(10,0), padx=(0,22))
     
     def convertButton(self):    
