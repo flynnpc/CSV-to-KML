@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import Tkinter as tk
-import ttk
-import tkFileDialog as tfd
+import tkinter as tk
+from tkinter import ttk
+from tkinter import filedialog as tfd
 import csv
 
 class Application(tk.Frame):
